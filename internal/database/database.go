@@ -38,7 +38,7 @@ var groups = []models.Group{
 			{
 				Person: models.Person{
 					ID:      4,
-					Name:    "John",
+					Name:    "Siyovush",
 					Surname: "Doe",
 					Phone:   "987654303",
 				},
@@ -49,7 +49,10 @@ var groups = []models.Group{
 					"week3": 82,
 					"week4": 56,
 				},
-				TopicsToWorkOn: nil,
+				TopicsToWorkOn: []string{
+					"structs",
+					"methods",
+				},
 			},
 			{
 				Person: models.Person{
