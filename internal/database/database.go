@@ -441,7 +441,7 @@ var groups = []models.Group{
 					ID:      28,
 					Name:    "Tamim",
 					Surname: "Orif",
-					Phone:   "987654327",
+					Phone:   "939132003",
 				},
 				GroupID: 3,
 				Grades: map[string]int{
@@ -450,7 +450,10 @@ var groups = []models.Group{
 					"week3": 33,
 					"week4": 1,
 				},
-				TopicsToWorkOn: nil,
+				TopicsToWorkOn: []string{
+					"Pointers",
+					"Packages",
+				},
 			},
 			{
 				Person: models.Person{
