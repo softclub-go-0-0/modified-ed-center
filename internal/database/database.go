@@ -275,7 +275,7 @@ var groups = []models.Group{
 					"week4": 1,
 				},
 				TopicsToWorkOn: []string{
-					"methods"
+					"methods",
 				},
 			},
 			{
