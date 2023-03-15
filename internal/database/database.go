@@ -274,7 +274,9 @@ var groups = []models.Group{
 					"week3": 33,
 					"week4": 1,
 				},
-				TopicsToWorkOn: nil,
+				TopicsToWorkOn: []string{
+					"methods",
+				},
 			},
 			{
 				Person: models.Person{
