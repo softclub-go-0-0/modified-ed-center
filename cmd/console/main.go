@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"modified-ed-center/internal/database"
 )
 
@@ -13,6 +14,11 @@ func main() {
 		fmt.Printf("\t1 - список всех преподавателей\n\t2 - поиск преподавателя по ID\n\t3 - поиск преподавателя по другим параметрам\n")
 		fmt.Printf("\t4 - список всех групп\n\t5 - поиск группы по ID\n\t6 - поиск группы по названию\n")
 		fmt.Printf("\t7 - список всех студентов\n\t8 - поиск студента по ID\n\t9 - поиск студента по другим параметрам\n")
+
+		fmt.Printf("\t10 - экспортировать список преподователей в txt файл\n")
+		fmt.Printf("\t11 - экспортировать список групп в txt файл\n")
+		fmt.Printf("\t12 - экспортировать список студентов в txt файл\n")
+
 		fmt.Scan(&command)
 
 		switch command {
@@ -79,6 +85,15 @@ func main() {
 			fmt.Scan(&query)
 			fmt.Println("Результат поиска:")
 			fmt.Println(database.DB.SearchStudent(query))
+		case 10:
+			var filename string
+			fmt.Print("Введите имя файла: ")
+			fmt.Scan(&filename)
+			numberOfTutors, err := database.DB.ExportTutorsToFile(filename)
+			if err != nil {
+				log.Fatal(err)
+			}
+			fmt.Println("Успешно экспортировано", numberOfTutors, "преподавателей в файл", filename)
 		case 0:
 			fmt.Println("Bye!")
 			return
