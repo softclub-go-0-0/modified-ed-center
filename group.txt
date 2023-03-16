@@ -1,0 +1,3 @@
+1,C#,Nurullah Sulaymonov
+2,C++,Muhammadjon Mirzoev
+3,Go,Siyovush Shorakhimzoda

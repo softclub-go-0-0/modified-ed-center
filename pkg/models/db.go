@@ -98,3 +98,21 @@ func (d DB) ExportTutorsToFile(filename string) (totalNumber int, err error) {
 
 	return len(d.Tutors), nil
 }
+
+func (d DB) ExportGroupsToFile(filename string) (totalNumber int, err error) {
+	file, err := os.Create(filename)
+	if err != nil {
+		return totalNumber, err
+	}
+	defer file.Close()
+
+	for _, group := range d.Groups {
+		groupData := fmt.Sprintf("%d,%s,%s\n", group.ID, group.Title, group.Tutor.Name+" "+group.Tutor.Surname)
+		_, err = file.WriteString(groupData)
+		if err != nil {
+			return
+		}
+	}
+
+	return len(d.Groups), nil
+}

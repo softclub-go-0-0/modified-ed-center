@@ -15,9 +15,9 @@ func main() {
 		fmt.Printf("\t4 - список всех групп\n\t5 - поиск группы по ID\n\t6 - поиск группы по названию\n")
 		fmt.Printf("\t7 - список всех студентов\n\t8 - поиск студента по ID\n\t9 - поиск студента по другим параметрам\n")
 
-		fmt.Printf("\t10 - экспортировать список преподователей в txt файл\n")
-		fmt.Printf("\t11 - экспортировать список групп в txt файл\n")
-		fmt.Printf("\t12 - экспортировать список студентов в txt файл\n")
+		fmt.Printf("\t10 - экспортировать список преподователей в csv файл\n")
+		fmt.Printf("\t11 - экспортировать список групп в csv файл\n")
+		fmt.Printf("\t12 - экспортировать список студентов в csv файл\n")
 
 		fmt.Scan(&command)
 
@@ -94,6 +94,15 @@ func main() {
 				log.Fatal(err)
 			}
 			fmt.Println("Успешно экспортировано", numberOfTutors, "преподавателей в файл", filename)
+		case 11:
+			var filename string
+			fmt.Print("Введите имя файла: ")
+			fmt.Scan(&filename)
+			numberOfGroups, err := database.DB.ExportGroupsToFile(filename)
+			if err != nil {
+				log.Fatal(err)
+			}
+			fmt.Println("Успешно экспортировано", numberOfGroups, "групп в файл", filename)
 		case 0:
 			fmt.Println("Bye!")
 			return
