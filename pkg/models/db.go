@@ -113,6 +113,23 @@ func (d DB) ExportGroupsToFile(filename string) (totalNumber int, err error) {
 			return
 		}
 	}
-
 	return len(d.Groups), nil
+}
+
+func (d DB) ExportStudentsToFile(filename string) (totalNumber int, err error) {
+	file, err := os.Create(filename)
+	if err != nil {
+		return totalNumber, err
+	}
+	defer file.Close()
+
+	for _, student := range d.Students {
+		studentData := fmt.Sprintf("%d,%s,%s,%s,%d\n", student.ID, student.Name, student.Surname, student.Phone, student.GroupID)
+		_, err = file.WriteString(studentData)
+		if err != nil {
+			return
+		}
+	}
+
+	return len(d.Students), nil
 }

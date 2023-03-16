@@ -103,6 +103,16 @@ func main() {
 				log.Fatal(err)
 			}
 			fmt.Println("Успешно экспортировано", numberOfGroups, "групп в файл", filename)
+		case 12:
+			var filename string
+			fmt.Print("Введите имя файла: ")
+			fmt.Scan(&filename)
+			numberOfStudents, err := database.DB.ExportStudentsToFile(filename)
+			if err != nil {
+				log.Fatal(err)
+			}
+			fmt.Println("Успешно экспортировано", numberOfStudents, "студентов в файл", filename)
+
 		case 0:
 			fmt.Println("Bye!")
 			return
