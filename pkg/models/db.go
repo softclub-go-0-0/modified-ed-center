@@ -1,8 +1,11 @@
 package models
 
 import (
+	"bufio"
 	"fmt"
 	"os"
+	"strconv"
+	"strings"
 )
 
 type DB struct { // имитатор базы данных
@@ -113,6 +116,7 @@ func (d DB) ExportGroupsToFile(filename string) (totalNumber int, err error) {
 			return
 		}
 	}
+
 	return len(d.Groups), nil
 }
 
@@ -132,4 +136,32 @@ func (d DB) ExportStudentsToFile(filename string) (totalNumber int, err error) {
 	}
 
 	return len(d.Students), nil
+}
+
+func (d DB) ImportTutorsFromFile(filename string) (tutors []Person, err error) {
+	file, err := os.Open(filename)
+	if err != nil {
+		return
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+
+	for scanner.Scan() {
+		tutorDataString := scanner.Text()
+		tutorData := strings.Split(tutorDataString, ",")
+		id, err := strconv.Atoi(tutorData[0])
+		if err != nil {
+			return nil, err
+		}
+		tutor := Person{
+			ID:      uint(id),
+			Name:    tutorData[1],
+			Surname: tutorData[2],
+			Phone:   tutorData[3],
+		}
+		tutors = append(tutors, tutor)
+	}
+
+	return
 }

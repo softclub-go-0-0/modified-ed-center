@@ -19,6 +19,10 @@ func main() {
 		fmt.Printf("\t11 - экспортировать список групп в csv файл\n")
 		fmt.Printf("\t12 - экспортировать список студентов в csv файл\n")
 
+		fmt.Printf("\t13 - импортировать список преподователей из csv файла\n")
+		fmt.Printf("\t14 - импортировать список групп из csv файла\n")
+		fmt.Printf("\t15 - импортировать список студентов из csv файла\n")
+
 		fmt.Scan(&command)
 
 		switch command {
@@ -112,7 +116,18 @@ func main() {
 				log.Fatal(err)
 			}
 			fmt.Println("Успешно экспортировано", numberOfStudents, "студентов в файл", filename)
-
+		case 13:
+			var filename string
+			fmt.Print("Введите имя файла данных: ")
+			fmt.Scan(&filename)
+			tutors, err := database.DB.ImportTutorsFromFile(filename)
+			if err != nil {
+				log.Fatal(err)
+			}
+			fmt.Println("Успешно импортировано", len(tutors), "преподавателей из файла", filename)
+			for _, tutor := range tutors {
+				fmt.Println(tutor.ID, ". ", tutor.Name, tutor.Surname)
+			}
 		case 0:
 			fmt.Println("Bye!")
 			return
